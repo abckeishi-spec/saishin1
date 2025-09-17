@@ -26,7 +26,7 @@ if (!function_exists('gi_get_option')) {
 
 <!-- Tailwind CSS Play CDN（既存設定保持＋プレミアム拡張） -->
 <?php if (!wp_script_is('tailwind-cdn', 'enqueued')): ?>
-<script src="https://cdn.tailwindcss.com"></script>
+
 <script>
     tailwind.config = {
         darkMode: 'class',

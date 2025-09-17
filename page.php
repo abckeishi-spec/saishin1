@@ -6,7 +6,7 @@
 
 get_header(); ?>
 
-<script src="https://cdn.tailwindcss.com/3.4.0"></script>
+
 <script>
     tailwind.config = {
         theme: {
