@@ -73,8 +73,8 @@ function gi_enqueue_scripts() {
     // メインスタイルシート
     wp_enqueue_style('gi-style', get_stylesheet_uri(), array(), GI_THEME_VERSION);
     
-    // 助成金一覧用CSS
-    wp_enqueue_style('gi-grants', get_template_directory_uri() . '/assets/css/grants.css', array(), GI_THEME_VERSION);
+    // 最適化されたCSS
+    wp_enqueue_style('gi-optimized', get_template_directory_uri() . '/assets/css/optimized.css', array(), GI_THEME_VERSION);
     
     // Google Fonts（日本語フォント）
     wp_enqueue_style('google-fonts-noto', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap', array(), null);
@@ -82,22 +82,11 @@ function gi_enqueue_scripts() {
     // メインJavaScript
     wp_enqueue_script('gi-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), GI_THEME_VERSION, true);
     
-    // 助成金一覧ページ専用スクリプト
-    if (is_post_type_archive('grant') || is_tax('grant_category') || is_tax('grant_prefecture')) {
-        wp_enqueue_script(
-            'gi-grant-list',
-            get_template_directory_uri() . '/assets/js/grant-list.js',
-            array('jquery'),
-            GI_THEME_VERSION,
-            true
-        );
-        
-        // Ajax設定
-        wp_localize_script('gi-grant-list', 'gi_ajax', array(
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('gi_grant_nonce')
-        ));
-    }
+    // AJAX設定（必要に応じてmain.jsで使用）
+    wp_localize_script('gi-main', 'gi_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('gi_ajax_nonce')
+    ));
 }
 add_action('wp_enqueue_scripts', 'gi_enqueue_scripts');
 
