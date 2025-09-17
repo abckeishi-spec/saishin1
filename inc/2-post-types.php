@@ -151,99 +151,9 @@ function gi_register_taxonomies() {
     ));
     
     // ツールカテゴリー
-    register_taxonomy('tool_category', 'tool', array(
-        'labels' => array(
-            'name' => 'ツールカテゴリー',
-            'singular_name' => 'ツールカテゴリー',
-            'search_items' => 'カテゴリーを検索',
-            'all_items' => 'すべてのカテゴリー',
-            'parent_item' => '親カテゴリー',
-            'parent_item_colon' => '親カテゴリー:',
-            'edit_item' => 'カテゴリーを編集',
-            'update_item' => 'カテゴリーを更新',
-            'add_new_item' => '新しいカテゴリーを追加',
-            'new_item_name' => '新しいカテゴリー名'
-        ),
-        'description' => 'ビジネスツールをカテゴリー別に分類します',
-        'public' => true,
-        'publicly_queryable' => true,
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'show_in_rest' => true,
-        'show_tagcloud' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array(
-            'slug' => 'tool-category',
-            'with_front' => false,
-            'hierarchical' => true
-        )
-    ));
     
     // 成功事例カテゴリー
-    register_taxonomy('case_study_category', 'case_study', array(
-        'labels' => array(
-            'name' => '成功事例カテゴリー',
-            'singular_name' => '成功事例カテゴリー',
-            'search_items' => 'カテゴリーを検索',
-            'all_items' => 'すべてのカテゴリー',
-            'parent_item' => '親カテゴリー',
-            'parent_item_colon' => '親カテゴリー:',
-            'edit_item' => 'カテゴリーを編集',
-            'update_item' => 'カテゴリーを更新',
-            'add_new_item' => '新しいカテゴリーを追加',
-            'new_item_name' => '新しいカテゴリー名'
-        ),
-        'description' => '成功事例をカテゴリー別に分類します',
-        'public' => true,
-        'publicly_queryable' => true,
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'show_in_rest' => true,
-        'show_tagcloud' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array(
-            'slug' => 'case-category',
-            'with_front' => false,
-            'hierarchical' => true
-        )
-    ));
 
     // 【修正】申請のコツカテゴリー（不足していたタクソノミー）
-    register_taxonomy('grant_tip_category', 'grant_tip', array(
-        'labels' => array(
-            'name' => '申請のコツカテゴリー',
-            'singular_name' => '申請のコツカテゴリー',
-            'search_items' => 'カテゴリーを検索',
-            'all_items' => 'すべてのカテゴリー',
-            'parent_item' => '親カテゴリー',
-            'parent_item_colon' => '親カテゴリー:',
-            'edit_item' => 'カテゴリーを編集',
-            'update_item' => 'カテゴリーを更新',
-            'add_new_item' => '新しいカテゴリーを追加',
-            'new_item_name' => '新しいカテゴリー名'
-        ),
-        'description' => '申請のコツをカテゴリー別に分類します',
-        'public' => true,
-        'publicly_queryable' => true,
-        'hierarchical' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'show_in_rest' => true,
-        'show_tagcloud' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => array(
-            'slug' => 'grant-tip-category',
-            'with_front' => false,
-            'hierarchical' => true
-        )
-    ));
 }
 add_action('init', 'gi_register_taxonomies');

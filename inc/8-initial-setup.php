@@ -351,12 +351,10 @@ function gi_insert_sample_grants_with_prefectures() {
     ];
     
     foreach ($sample_tools as $tool_data) {
-        if (!get_page_by_title($tool_data['title'], OBJECT, 'tool')) {
             $post_id = wp_insert_post([
                 'post_title'   => $tool_data['title'],
                 'post_content' => $tool_data['content'],
                 'post_excerpt' => wp_trim_words($tool_data['content'], 15),
-                'post_type'    => 'tool',
                 'post_status'  => 'publish',
                 'meta_input'   => [
                     'price_monthly' => $tool_data['price_monthly'],
@@ -371,7 +369,6 @@ function gi_insert_sample_grants_with_prefectures() {
             
             if ($post_id && !is_wp_error($post_id)) {
                 wp_set_object_terms($post_id, $tool_data['category'], 'tool_category');
-                gi_set_sample_thumbnail($post_id, 'tool');
             }
         }
     }
@@ -419,12 +416,10 @@ function gi_insert_sample_grants_with_prefectures() {
     ];
     
     foreach ($sample_tips as $tip_data) {
-        if (!get_page_by_title($tip_data['title'], OBJECT, 'grant_tip')) {
             $post_id = wp_insert_post([
                 'post_title'   => $tip_data['title'],
                 'post_content' => $tip_data['content'] . "\n\n" . gi_generate_sample_tip_content($tip_data['category']),
                 'post_excerpt' => wp_trim_words($tip_data['content'], 25),
-                'post_type'    => 'grant_tip',
                 'post_status'  => 'publish',
                 'meta_input'   => [
                     'difficulty'     => $tip_data['difficulty'],
@@ -436,7 +431,6 @@ function gi_insert_sample_grants_with_prefectures() {
             
             if ($post_id && !is_wp_error($post_id)) {
                 wp_set_object_terms($post_id, $tip_data['category'], 'grant_tip_category');
-                gi_set_sample_thumbnail($post_id, 'grant_tip');
             }
         }
     }
@@ -556,8 +550,6 @@ function gi_set_sample_thumbnail($post_id, $post_type) {
     // プレースホルダー画像のURL（実際の運用では適切な画像に変更）
     $placeholder_images = [
         'grant' => 'https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Grant',
-        'tool' => 'https://via.placeholder.com/400x300/10B981/FFFFFF?text=Tool',
-        'grant_tip' => 'https://via.placeholder.com/400x300/F59E0B/FFFFFF?text=Tips'
     ];
     
     $image_url = $placeholder_images[$post_type] ?? $placeholder_images['grant'];
@@ -650,8 +642,6 @@ function gi_check_setup_status() {
     $status = array(
         'setup_completed' => get_option('gi_initial_setup_completed', false),
         'grants_count' => wp_count_posts('grant')->publish,
-        'tools_count' => wp_count_posts('tool')->publish,
-        'tips_count' => wp_count_posts('grant_tip')->publish,
         'prefectures_count' => wp_count_terms('grant_prefecture'),
         'categories_count' => wp_count_terms('grant_category')
     );
@@ -700,8 +690,6 @@ function gi_debug_theme_status() {
         'setup_status' => gi_check_setup_status(),
         'post_types_exist' => array(
             'grant' => post_type_exists('grant'),
-            'tool' => post_type_exists('tool'),
-            'grant_tip' => post_type_exists('grant_tip')
         ),
         'taxonomies_exist' => array(
             'grant_category' => taxonomy_exists('grant_category'),
@@ -733,7 +721,6 @@ function gi_theme_deactivation_cleanup() {
     if (defined('GI_DELETE_DATA_ON_DEACTIVATION') && GI_DELETE_DATA_ON_DEACTIVATION) {
         // サンプルデータの削除（タイトルに【サンプル】が含まれるもの）
         $sample_posts = get_posts(array(
-            'post_type' => array('grant', 'tool', 'grant_tip'),
             'posts_per_page' => -1,
             'post_status' => 'any',
             's' => '【サンプル】'

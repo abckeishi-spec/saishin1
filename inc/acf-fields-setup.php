@@ -554,13 +554,11 @@ function gi_set_acf_default_values($post_id, $post, $update) {
     }
     
     // ツール投稿タイプの場合
-    if ($post->post_type === 'tool') {
         update_field('rating', 4.5, $post_id);
         update_field('view_count', 0, $post_id);
     }
     
     // 申請のコツ投稿タイプの場合
-    if ($post->post_type === 'grant_tip') {
         update_field('difficulty', '初級', $post_id);
         update_field('reading_time', 5, $post_id);
         update_field('usefulness_rating', 4.0, $post_id);
@@ -633,7 +631,6 @@ function gi_validate_acf_fields() {
             'subsidy_rate',
             'grant_target'
         ),
-        'tool' => array(
             'price_monthly',
             'price_free',
             'rating',
@@ -641,7 +638,6 @@ function gi_validate_acf_fields() {
             'tool_url',
             'company'
         ),
-        'grant_tip' => array(
             'difficulty',
             'reading_time',
             'usefulness_rating'

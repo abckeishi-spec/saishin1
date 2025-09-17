@@ -586,9 +586,6 @@ function gi_get_post_categories($post_id, $taxonomy = null) {
     if (!$taxonomy) {
         $taxonomy_map = array(
             'grant' => 'grant_category',
-            'tool' => 'tool_category',
-            'case_study' => 'case_study_category',
-            'grant_tip' => 'grant_tip_category',
             'post' => 'category'
         );
         
@@ -704,10 +701,6 @@ function gi_update_search_stats_cache() {
         // キャッシュがない場合は新しく生成
         $stats = array(
             'total_grants' => wp_count_posts('grant')->publish ?? 0,
-            'total_tools' => wp_count_posts('tool')->publish ?? 0,
-            'total_cases' => wp_count_posts('case_study')->publish ?? 0,
-            'total_guides' => wp_count_posts('guide')->publish ?? 0,
-            'total_tips' => wp_count_posts('grant_tip')->publish ?? 0,
             'last_updated' => current_time('timestamp')
         );
         
@@ -730,10 +723,6 @@ function gi_get_search_stats() {
     // フォールバック用のデフォルト値
     $defaults = array(
         'total_grants' => 0,
-        'total_tools' => 0,
-        'total_cases' => 0,
-        'total_guides' => 0,
-        'total_tips' => 0,
         'last_updated' => current_time('timestamp')
     );
     
@@ -777,14 +766,6 @@ function gi_validate_required_fields($post_id) {
             'organization' => '実施組織',
             'application_status' => '公募ステータス',
             'max_amount' => '最大金額'
-        ),
-        'tool' => array(
-            'price_monthly' => '月額料金',
-            'rating' => '評価'
-        ),
-        'grant_tip' => array(
-            'difficulty' => '難易度',
-            'reading_time' => '読了時間'
         )
     );
     

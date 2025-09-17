@@ -67,19 +67,15 @@ get_header();
                                             $badge_class = 'bg-emerald-100 text-emerald-800';
                                             $badge_text = '助成金・補助金';
                                             break;
-                                        case 'tool':
                                             $badge_class = 'bg-blue-100 text-blue-800';
                                             $badge_text = 'ビジネスツール';
                                             break;
-                                        case 'case_study':
                                             $badge_class = 'bg-purple-100 text-purple-800';
                                             $badge_text = '成功事例';
                                             break;
-                                        case 'guide':
                                             $badge_class = 'bg-orange-100 text-orange-800';
                                             $badge_text = 'ガイド・解説';
                                             break;
-                                        case 'grant_tip':
                                             $badge_class = 'bg-yellow-100 text-yellow-800';
                                             $badge_text = '申請のコツ';
                                             break;
