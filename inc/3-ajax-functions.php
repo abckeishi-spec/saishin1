@@ -54,20 +54,7 @@ function gi_ajax_load_grants() {
     $page = max(1, intval($_POST['page'] ?? 1));
     $posts_per_page = 12;
     
-    // デバッグログ
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log('AJAX Load Grants - Received params:');
-        error_log('Search: ' . $search);
-        error_log('Categories: ' . print_r($categories, true));
-        error_log('Prefectures: ' . print_r($prefectures, true));
-        error_log('Tags: ' . print_r($tags, true));
-        error_log('Amount: ' . $amount);
-        error_log('Status: ' . print_r($status, true));
-        error_log('Subsidy Rate: ' . $subsidy_rate);
-        error_log('Organization: ' . $organization);
-        error_log('Target Business: ' . $target_business);
-        error_log('Only Featured: ' . $only_featured);
-    }
+
     
     // 配列検証（型チェック）
     if (!is_array($categories)) $categories = [];

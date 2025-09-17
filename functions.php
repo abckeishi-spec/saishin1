@@ -31,9 +31,7 @@ $required_files = array(
     '7-acf-setup.php',                // ACF関連
     '8-initial-setup.php',            // 初期データ投入
     'performance-helpers.php',        // パフォーマンス最適化ヘルパー
-    'class-gemini-ai.php',           // Gemini AI API統合クラス
-    'class-chat-history.php',        // チャット履歴管理クラス
-    'ai-chatbot-settings.php',       // AIチャットボット設定ページ
+
     '9-mobile-optimization.php',     // モバイル最適化機能
     'acf-fields-setup.php'           // ACFフィールド定義 ✅ 修正
 );
@@ -107,7 +105,6 @@ if (!function_exists('gi_add_defer_attribute')) {
         // 特定のハンドルにのみdeferを追加
         $defer_handles = array(
             'gi-main-js',
-            'ai-chatbot-js',
             'gi-frontend-js',
             'gi-mobile-menu'
         );
@@ -200,23 +197,7 @@ if (!function_exists('gi_update_theme_option')) {
     }
 }
 
-/**
- * メモリ使用量の監視（本番環境では無効化推奨）
- */
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    add_action('shutdown', function() {
-        $memory_usage = memory_get_peak_usage(true) / 1024 / 1024;
-        $execution_time = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-        
-        if ($memory_usage > 64 || $execution_time > 1) {
-            gi_log_error('Performance warning', array(
-                'memory_usage_mb' => round($memory_usage, 2),
-                'execution_time_sec' => round($execution_time, 3),
-                'request_uri' => $_SERVER['REQUEST_URI'] ?? ''
-            ));
-        }
-    });
-}
+
 
 /**
  * テーマのバージョンアップグレード処理
@@ -257,42 +238,3 @@ add_action('init', 'gi_theme_version_upgrade');
 /**
  * AJAXハンドラーの登録確認
  */
-function gi_verify_ajax_handlers() {
-    $required_ajax_actions = array(
-        'gi_load_grants',
-        'gi_toggle_favorite',
-        'gi_load_tools',
-        'gi_load_grant_tips',
-        'grant_insight_search',
-        'ai_chat_send_message'
-    );
-    
-    foreach ($required_ajax_actions as $action) {
-        if (!has_action('wp_ajax_' . $action)) {
-            gi_log_error('Missing AJAX handler: ' . $action);
-        }
-    }
-}
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    add_action('init', 'gi_verify_ajax_handlers', 999);
-}
-
-/**
- * テーマサポート機能の最終確認
- */
-function gi_verify_theme_support() {
-    $required_features = array(
-        'post-thumbnails',
-        'title-tag',
-        'html5',
-        'custom-logo',
-        'menus'
-    );
-    
-    foreach ($required_features as $feature) {
-        if (!current_theme_supports($feature)) {
-            gi_log_error('Missing theme support: ' . $feature);
-        }
-    }
-}
-add_action('after_setup_theme', 'gi_verify_theme_support', 999);
