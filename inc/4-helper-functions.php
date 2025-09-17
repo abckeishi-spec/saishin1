@@ -43,6 +43,7 @@ function gi_get_acf_field_safely($post_id, $field_name, $default = '') {
         'deadline' => array('deadline_date', 'deadline_text'),
         'max_amount_numeric' => array('max_amount_num', 'amount_numeric'),
         'grant_target' => array('target_business', 'target'),
+        'target_business' => array('grant_target', 'target'), // 逆方向マッピング追加
         'application_status' => array('status', 'grant_status'),
         'grant_difficulty' => array('difficulty', 'application_difficulty'),
         'grant_success_rate' => array('success_rate', 'adoption_rate'),

@@ -517,15 +517,6 @@ function gi_register_acf_field_groups() {
         'show_in_rest' => 0,
     ));
     
-    /**
-     * ツール詳細フィールドグループ
-     */
-    acf_add_local_field_group(array(
-    
-    /**
-     * 申請のコツ詳細フィールドグループ
-     */
-    acf_add_local_field_group(array(
 }
 
 // ACFが有効な場合のみ実行
@@ -553,17 +544,7 @@ function gi_set_acf_default_values($post_id, $post, $update) {
         update_field('priority_order', 100, $post_id);
     }
     
-    // ツール投稿タイプの場合
-        update_field('rating', 4.5, $post_id);
-        update_field('view_count', 0, $post_id);
-    }
-    
-    // 申請のコツ投稿タイプの場合
-        update_field('difficulty', '初級', $post_id);
-        update_field('reading_time', 5, $post_id);
-        update_field('usefulness_rating', 4.0, $post_id);
-        update_field('view_count', 0, $post_id);
-    }
+
 }
 add_action('wp_insert_post', 'gi_set_acf_default_values', 10, 3);
 
@@ -575,15 +556,11 @@ function gi_increment_views_count() {
         global $post;
         $post_type = get_post_type($post->ID);
         
-        // 投稿タイプごとにフィールド名を変更
+        // 助成金投稿タイプのみ対応
         $field_name = '';
         switch ($post_type) {
             case 'grant':
                 $field_name = 'views_count';
-                break;
-                $field_name = 'view_count';
-                break;
-                $field_name = 'view_count';
                 break;
         }
         
@@ -630,17 +607,6 @@ function gi_validate_acf_fields() {
             'grant_success_rate',
             'subsidy_rate',
             'grant_target'
-        ),
-            'price_monthly',
-            'price_free',
-            'rating',
-            'features',
-            'tool_url',
-            'company'
-        ),
-            'difficulty',
-            'reading_time',
-            'usefulness_rating'
         )
     );
     
