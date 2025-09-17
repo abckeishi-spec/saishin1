@@ -32,10 +32,7 @@ if (!function_exists('gi_get_search_stats')) {
         
         if (false === $stats) {
             $stats = [
-                'total_grants' => (int) wp_count_posts('grant')->publish ?: 1247,
-                'total_tools' => (int) wp_count_posts('tool')->publish ?: 89,
-                'total_cases' => (int) wp_count_posts('case_study')->publish ?: 156,
-                'total_guides' => (int) wp_count_posts('guide')->publish ?: 234
+                'total_grants' => (int) wp_count_posts('grant')->publish ?: 1247
             ];
             wp_cache_set($cache_key, $stats, 'grant_insight', 3600);
         }

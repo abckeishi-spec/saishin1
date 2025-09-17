@@ -21,17 +21,13 @@ function gi_theme_activation_setup() {
     // 必須データの投入
     gi_insert_default_prefectures();
     gi_insert_default_categories();
-    gi_insert_tool_categories();
-    gi_insert_grant_tip_categories();
 
     // サンプル助成金データの投入（不要な場合はこの行をコメントアウトしてください）
     gi_insert_sample_grants_with_prefectures();
     
     // サンプルツールデータの投入
-    gi_insert_sample_tools();
     
     // サンプル申請のコツデータの投入
-    gi_insert_sample_grant_tips();
     
     // パーマリンク設定を更新して、新しい投稿タイプのURLを正しく機能させる
     flush_rewrite_rules();
@@ -102,7 +98,6 @@ function gi_insert_default_categories() {
 /**
  * ツール用カテゴリーデータの挿入
  */
-function gi_insert_tool_categories() {
     $tool_categories = array(
         'プロジェクト管理',
         'コミュニケーション',
@@ -132,7 +127,6 @@ function gi_insert_tool_categories() {
 /**
  * 申請のコツ用カテゴリーデータの挿入
  */
-function gi_insert_grant_tip_categories() {
     $tip_categories = array(
         '申請書作成のコツ',
         '事業計画書の書き方',
@@ -298,7 +292,6 @@ function gi_insert_sample_grants_with_prefectures() {
 /**
  * サンプルツールデータの投入
  */
-function gi_insert_sample_tools() {
     $sample_tools = [
         [
             'title' => '【サンプル】Slack - チームコミュニケーションツール',
@@ -387,7 +380,6 @@ function gi_insert_sample_tools() {
 /**
  * サンプル申請のコツデータの投入
  */
-function gi_insert_sample_grant_tips() {
     $sample_tips = [
         [
             'title' => '【サンプル】採択率を上げる事業計画書の書き方',
@@ -784,8 +776,6 @@ function gi_theme_upgrade_process($old_version, $new_version) {
     }
     
     // 新しいカテゴリーが追加された場合の処理
-    gi_insert_tool_categories();
-    gi_insert_grant_tip_categories();
     
     error_log("Grant Insight Theme upgraded from {$old_version} to {$new_version}");
 }
